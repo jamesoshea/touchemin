@@ -1,0 +1,13 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:vue/essential",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "quotes": ["error", "single"],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-unused-vars": "error",
+    "semi": ["error", "always"]
+  }
+}
