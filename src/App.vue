@@ -12,7 +12,11 @@ export default {
   name: 'app',
   components: {
     NoteCanvas
-  }
+  },
+  data() {
+    return {
+    };
+  },
 };
 </script>
 

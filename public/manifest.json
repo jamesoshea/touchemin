@@ -1,6 +1,6 @@
 {
-  "name": "my-project",
-  "short_name": "my-project",
+  "name": "touchemin",
+  "short_name": "touchemin",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",

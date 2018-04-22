@@ -1,17 +1,28 @@
 <template>
   <div class="hello">
-    <p>{{ msg }}</p>
+    <p>{{ output }}</p>
   </div>
 </template>
 
 <script>
-const wowdlksdlkn = 'poo';
-console.error(wowdlksdlkn);
 
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      output: '', 
+    };
+  },
+  mounted() {
+    navigator.requestMIDIAccess()
+      .then(function(access) {
+
+        // Get lists of available MIDI controllers
+        this.output = access.outputs.values();
+      });
   }
 };
 </script>
