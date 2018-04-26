@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <NoteCanvas msg="Welcome to Your Vue.js App"/>
+    <div id="touchemin-expression-canvas-container">
+      <ExpressionCanvas />
+    </div>
+    <div id="touchemin-note-canvas-container">
+      <NoteCanvas msg="Welcome to Your Vue.js App"/>
+    </div>
   </div>
 </template>
 
 <script>
-import NoteCanvas from './components/HelloWorld.vue';
+import NoteCanvas from './components/NoteCanvas.vue';
+import ExpressionCanvas from './components/ExpressionCanvas.vue';
 
 export default {
   name: 'app',
   components: {
-    NoteCanvas
+    NoteCanvas,
+    ExpressionCanvas,
   },
   data() {
     return {
@@ -26,7 +32,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+}
+
+#touchemin-expression-canvas-container {
+  flex-basis: 33%;
+}
+
+#touchemin-note-canvas-container {
+  flex-basis: 66%;
 }
 </style>
