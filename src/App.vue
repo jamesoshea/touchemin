@@ -43,15 +43,22 @@ export default {
       type: 'lowpass',
       Q: 12,
     }).toMaster();
-    this.synth = new Tone.PolySynth(4, Tone.Synth, synthOptions).connect(this.filter);
+    this.synth = new Tone.PolySynth(4, Tone.Synth, synthOptions).chain(this.filter, Tone.Master);
   },
 };
 </script>
 
 <style lang="scss">
+@import 'assets/variables.scss';
 html,
 body {
   margin: 0;
+  background-color: $lightest-color;
+}
+
+.canvas-container {
+  height: 100%;
+  width: 100%;
 }
 
 #app {
@@ -69,12 +76,12 @@ body {
 }
 
 #touchemin__expression-canvas-container {
-  flex-basis: 33%;
+  flex-basis: 20%;
   height: 100%;
 }
 
 #touchemin__note-canvas-container {
-  flex-basis: 67%;
+  flex-basis: 80%;
   height: 100%;
 }
 </style>

@@ -34,8 +34,8 @@ export default {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.height = window.innerHeight;
     this.canvas.height = window.innerHeight;
-    this.ctx.width = window.innerWidth / 3;
-    this.canvas.width = window.innerWidth / 3;
+    this.ctx.width = window.innerWidth * 0.2;
+    this.canvas.width = window.innerWidth * 0.2;
     this.canvas.addEventListener('touchmove', e => {
       e.preventDefault();
       const normalisedY = normaliseScreenHeight(e.targetTouches[0].clientY, window.innerHeight);
@@ -50,6 +50,6 @@ export default {
 @import '../assets/variables.scss';
 
 canvas {
-  background-color: $darkest-color;
+  background: linear-gradient($lightest-color, $darkest-color);
 }
 </style>

@@ -26,11 +26,8 @@ export default {
       this.ctx.strokeStyle = 'white';
       this.ctx.stroke();
     },
-    mapTouchesToNotes(touches) {
-      return Array.from(touches).map(touch => this.notes[touch.identifier]);
-    },
-    startNotes(touches) {
-      this.synth.triggerAttack(this.mapTouchesToNotes(touches));
+    startNote(identifier) {
+      this.synth.triggerAttack(this.notes[identifier]);
     },
     endNote(identifier) {
       this.synth.triggerRelease([this.notes[identifier]]);
@@ -41,12 +38,12 @@ export default {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.height = window.innerHeight;
     this.canvas.height = window.innerHeight;
-    this.ctx.width = window.innerWidth / (3 / 2);
-    this.canvas.width = window.innerWidth / (3 / 2);
+    this.ctx.width = window.innerWidth * 0.8;
+    this.canvas.width = window.innerWidth * 0.8;
     this.canvas.addEventListener('touchstart', e => {
       e.preventDefault();
-      this.startNotes(e.targetTouches);
-      Array.from(e.targetTouches).forEach(touch => {
+      Array.from(e.changedTouches).forEach(touch => {
+        this.startNote(touch.identifier);
         this.drawPoint(touch);
       });
     });
