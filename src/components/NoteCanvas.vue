@@ -8,6 +8,9 @@
 import { getTouchPos } from '../utils/TouchUtils.js';
 export default {
   name: 'NoteCanvas',
+  props: {
+    synth: Object,
+  },
   data() {
     return {
       canvas: null,
@@ -18,17 +21,13 @@ export default {
     drawPoint(touch) {
       this.ctx.beginPath();
       const touchPos = getTouchPos(this.canvas, touch);
-      this.ctx.arc(
-        touchPos.x,
-        touchPos.y,
-        10,
-        0,
-        Math.PI * 4,
-        true
-      );
-      this.ctx.fillStyle = 'white';
-      this.ctx.fill();
-    }
+      this.ctx.arc(touchPos.x, touchPos.y, 5, 0, Math.PI * 4, true);
+      this.ctx.strokeStyle = 'white';
+      this.ctx.stroke();
+    },
+    playNote() {
+      this.synth.triggerAttackRelease('C4', '8n');
+    },
   },
   mounted() {
     this.canvas = document.getElementById('touchemin-note-canvas');
@@ -37,22 +36,23 @@ export default {
     this.canvas.height = window.innerHeight;
     this.ctx.width = window.innerWidth / (3 / 2);
     this.canvas.width = window.innerWidth / (3 / 2);
-    window.addEventListener('touchstart', (e) => {
+    window.addEventListener('touchstart', e => {
       e.preventDefault();
-      Array.from(e.targetTouches).forEach((touch) => {
+      Array.from(e.targetTouches).forEach(touch => {
         if (touch.target === this.canvas) {
           this.drawPoint(touch);
+          this.playNote(touch);
         }
-      })
-    })
+      });
+    });
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/variables.scss';
+@import '../assets/variables.scss';
 
-  canvas {
-    background-color: $lightest-color;
-  }
+canvas {
+  background-color: $lightest-color;
+}
 </style>

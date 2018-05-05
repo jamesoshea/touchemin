@@ -9,6 +9,9 @@ import { getTouchPos } from '../utils/TouchUtils.js';
 
 export default {
   name: 'ExpressionCanvas',
+  props: {
+    synth: Object,
+  },
   data() {
     return {
       canvas: null,
@@ -19,18 +22,10 @@ export default {
     drawPoint(touch) {
       this.ctx.beginPath();
       const touchPos = getTouchPos(this.canvas, touch);
-      console.log(touchPos)
-      this.ctx.arc(
-        touchPos.x,
-        touchPos.y,
-        5,
-        0,
-        Math.PI * 4,
-        true
-      );
-      this.ctx.fillStyle = 'white';
-      this.ctx.fill();
-    }
+      this.ctx.arc(touchPos.x, touchPos.y, 5, 0, Math.PI * 4, true);
+      this.ctx.strokeStyle = 'white';
+      this.ctx.stroke();
+    },
   },
   mounted() {
     this.canvas = document.getElementById('touchemin-expression-canvas');
@@ -39,22 +34,22 @@ export default {
     this.canvas.height = window.innerHeight;
     this.ctx.width = window.innerWidth / 3;
     this.canvas.width = window.innerWidth / 3;
-    this.canvas.addEventListener('touchstart', (e) => {
+    this.canvas.addEventListener('touchstart', e => {
       e.preventDefault();
-      Array.from(e.targetTouches).forEach((touch) => {
+      Array.from(e.targetTouches).forEach(touch => {
         if (touch.target === this.canvas) {
           this.drawPoint(touch);
         }
-      })
+      });
     });
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/variables.scss';
+@import '../assets/variables.scss';
 
-  canvas {
-    background-color: $darkest-color;
-  }
+canvas {
+  background-color: $darkest-color;
+}
 </style>
