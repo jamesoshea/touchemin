@@ -1,3 +1,13 @@
-// const state = {};
+import Vuex from 'vuex';
 
-// export { state, mutations, actions, getters };
+import ChordsModule from './modules/chords';
+
+const store = new Vuex.Store({
+  modules,
+});
+
+const modules = {
+  ChordsModule,
+};
+
+export default store;

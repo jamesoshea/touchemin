@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <ChordPicker />
     <div id="touchemin__expression-canvas-container">
       <ExpressionCanvas :filter="filter"/>
     </div>
@@ -14,12 +15,14 @@ import Tone from 'tone';
 
 import NoteCanvas from './components/NoteCanvas.vue';
 import ExpressionCanvas from './components/ExpressionCanvas.vue';
+import ChordPicker from './components/ChordPicker.vue';
 
 export default {
   name: 'app',
   components: {
     NoteCanvas,
     ExpressionCanvas,
+    ChordPicker,
   },
   data() {
     return {
