@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "register-service-worker": "^1.0.0",
+    "tone": "^0.12.80",
     "vue": "^2.5.13",
     "vuex": "^3.0.1"
   },
