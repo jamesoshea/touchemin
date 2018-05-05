@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import { getTouchPos } from '../utils/TouchUtils.js';
+import { getTouchPos, normaliseScreenHeight } from '../utils/TouchUtils.js';
+import { mapNormalisedToHumanHearing } from '../utils/SoundUtils.js';
 
 export default {
   name: 'ExpressionCanvas',
   props: {
-    synth: Object,
+    filter: Object,
   },
   data() {
     return {
@@ -35,8 +36,11 @@ export default {
     this.canvas.height = window.innerHeight;
     this.ctx.width = window.innerWidth / 3;
     this.canvas.width = window.innerWidth / 3;
-    this.canvas.addEventListener('touchstart', e => {
-      this.drawPoint(e);
+    this.canvas.addEventListener('touchmove', e => {
+      e.preventDefault();
+      const normalisedY = normaliseScreenHeight(e.targetTouches[0].clientY, window.innerHeight);
+      const newCutoffFrequency = mapNormalisedToHumanHearing(normalisedY);
+      this.filter.frequency.setValueAtTime(newCutoffFrequency, 0);
     });
   },
 };

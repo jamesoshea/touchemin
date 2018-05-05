@@ -9,4 +9,8 @@ const getTouchPos = (canvas, x, y) => {
   };
 };
 
-export { getTouchPos };
+const normaliseScreenHeight = (input, screenHeight) => {
+  return 1 - ((input - 0) * (1 - 0) / (screenHeight - 0) + 0);
+};
+
+export { getTouchPos, normaliseScreenHeight };

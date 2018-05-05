@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="touchemin__expression-canvas-container">
-      <ExpressionCanvas :synth="synth"/>
+      <ExpressionCanvas :filter="filter"/>
     </div>
     <div id="touchemin__note-canvas-container">
       <NoteCanvas :synth="synth"/>
@@ -30,7 +30,7 @@ export default {
   mounted() {
     const synthOptions = {
       oscillator: {
-        type: 'triangle',
+        type: 'sawtooth',
       },
       envelope: {
         attack: 0.001,
@@ -39,8 +39,11 @@ export default {
         release: 0.1,
       },
     };
-    this.filter = new Tone.Filter(400, 'lowpass');
-    this.synth = new Tone.PolySynth(4, Tone.Synth, synthOptions).chain(this.filter, Tone.Master);
+    this.filter = new Tone.Filter({
+      type: 'lowpass',
+      Q: 12,
+    }).toMaster();
+    this.synth = new Tone.PolySynth(4, Tone.Synth, synthOptions).connect(this.filter);
   },
 };
 </script>

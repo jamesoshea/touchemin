@@ -33,7 +33,6 @@ export default {
       this.synth.triggerAttack(this.mapTouchesToNotes(touches));
     },
     endNote(identifier) {
-      console.log(this.notes[identifier]);
       this.synth.triggerRelease([this.notes[identifier]]);
     },
   },
