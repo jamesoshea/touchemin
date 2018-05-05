@@ -15,7 +15,7 @@ export default {
     return {
       canvas: null,
       ctx: null,
-      notes: [130.81, 164.81, 196.0],
+      notes: [130.81, 164.81, 196.0, 261.63],
     };
   },
   methods: {
@@ -26,11 +26,14 @@ export default {
       this.ctx.strokeStyle = 'white';
       this.ctx.stroke();
     },
-    startNote(identifier) {
-      this.synth.triggerAttack(this.notes[identifier]);
+    mapTouchesToNotes(touches) {
+      return Array.from(touches).map(touch => this.notes[touch.identifier]);
+    },
+    startNotes(touches) {
+      this.synth.triggerAttack(this.mapTouchesToNotes(touches));
     },
     endNote(identifier) {
-      this.synth.triggerRelease();
+      this.synth.triggerRelease(this.notes[identifier]);
     },
   },
   mounted() {
@@ -41,15 +44,14 @@ export default {
     this.ctx.width = window.innerWidth / (3 / 2);
     this.canvas.width = window.innerWidth / (3 / 2);
     this.canvas.addEventListener('touchstart', e => {
+      this.startNotes(e.targetTouches);
       Array.from(e.targetTouches).forEach(touch => {
-        this.startNote(touch.identifier);
         this.drawPoint(touch);
       });
     });
     this.canvas.addEventListener('touchend', e => {
-      Array.from(e.targetTouches).forEach(touch => {
-        this.endNote(touch.identifier);
-      });
+      console.log(e);
+      this.endNote(e.which);
     });
   },
 };

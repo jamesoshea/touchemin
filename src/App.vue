@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    this.synth = new Tone.Synth().toMaster();
+    this.synth = new Tone.PolySynth(4, Tone.Synth).toMaster();
   },
 };
 </script>
