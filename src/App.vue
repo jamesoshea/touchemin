@@ -23,11 +23,24 @@ export default {
   },
   data() {
     return {
+      filter: null,
       synth: null,
     };
   },
   mounted() {
-    this.synth = new Tone.PolySynth(4, Tone.Synth).toMaster();
+    const synthOptions = {
+      oscillator: {
+        type: 'triangle',
+      },
+      envelope: {
+        attack: 0.001,
+        decay: 0.1,
+        sustain: 0.1,
+        release: 0.1,
+      },
+    };
+    this.filter = new Tone.Filter(400, 'lowpass');
+    this.synth = new Tone.PolySynth(4, Tone.Synth, synthOptions).chain(this.filter, Tone.Master);
   },
 };
 </script>

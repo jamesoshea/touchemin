@@ -33,7 +33,8 @@ export default {
       this.synth.triggerAttack(this.mapTouchesToNotes(touches));
     },
     endNote(identifier) {
-      this.synth.triggerRelease(this.notes[identifier]);
+      console.log(this.notes[identifier]);
+      this.synth.triggerRelease([this.notes[identifier]]);
     },
   },
   mounted() {
@@ -44,14 +45,14 @@ export default {
     this.ctx.width = window.innerWidth / (3 / 2);
     this.canvas.width = window.innerWidth / (3 / 2);
     this.canvas.addEventListener('touchstart', e => {
+      e.preventDefault();
       this.startNotes(e.targetTouches);
       Array.from(e.targetTouches).forEach(touch => {
         this.drawPoint(touch);
       });
     });
     this.canvas.addEventListener('touchend', e => {
-      console.log(e);
-      this.endNote(e.which);
+      this.endNote(e.changedTouches[0].identifier);
     });
   },
 };
