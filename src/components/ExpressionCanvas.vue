@@ -16,6 +16,7 @@ export default {
     return {
       canvas: null,
       ctx: null,
+      currentX: 0,
     };
   },
   methods: {
@@ -35,12 +36,7 @@ export default {
     this.ctx.width = window.innerWidth / 3;
     this.canvas.width = window.innerWidth / 3;
     this.canvas.addEventListener('touchstart', e => {
-      e.preventDefault();
-      Array.from(e.targetTouches).forEach(touch => {
-        if (touch.target === this.canvas) {
-          this.drawPoint(touch);
-        }
-      });
+      this.drawPoint(e);
     });
   },
 };

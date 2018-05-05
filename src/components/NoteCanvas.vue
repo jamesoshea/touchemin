@@ -15,18 +15,22 @@ export default {
     return {
       canvas: null,
       ctx: null,
+      notes: [130.81, 164.81, 196.0],
     };
   },
   methods: {
     drawPoint(touch) {
       this.ctx.beginPath();
-      const touchPos = getTouchPos(this.canvas, touch);
+      const touchPos = getTouchPos(this.canvas, touch.clientX, touch.clientY);
       this.ctx.arc(touchPos.x, touchPos.y, 5, 0, Math.PI * 4, true);
       this.ctx.strokeStyle = 'white';
       this.ctx.stroke();
     },
-    playNote() {
-      this.synth.triggerAttackRelease('C4', '8n');
+    startNote(identifier) {
+      this.synth.triggerAttack(this.notes[identifier]);
+    },
+    endNote(identifier) {
+      this.synth.triggerRelease();
     },
   },
   mounted() {
@@ -36,13 +40,15 @@ export default {
     this.canvas.height = window.innerHeight;
     this.ctx.width = window.innerWidth / (3 / 2);
     this.canvas.width = window.innerWidth / (3 / 2);
-    window.addEventListener('touchstart', e => {
-      e.preventDefault();
+    this.canvas.addEventListener('touchstart', e => {
       Array.from(e.targetTouches).forEach(touch => {
-        if (touch.target === this.canvas) {
-          this.drawPoint(touch);
-          this.playNote(touch);
-        }
+        this.startNote(touch.identifier);
+        this.drawPoint(touch);
+      });
+    });
+    this.canvas.addEventListener('touchend', e => {
+      Array.from(e.targetTouches).forEach(touch => {
+        this.endNote(touch.identifier);
       });
     });
   },
