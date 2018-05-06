@@ -2,12 +2,13 @@
   <div id="app">
     <div class="touchemin__left-main-container">
       <ChordPicker />
-      
+
     </div>
     <div class="touchemin__right-main-container">
       <NoteCanvas :synth="synth"/>
       <ExpressionCanvas :filter="filter"/>
     </div>
+    <SettingsButton />
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import Tone from 'tone';
 import NoteCanvas from './components/NoteCanvas.vue';
 import ExpressionCanvas from './components/ExpressionCanvas.vue';
 import ChordPicker from './components/ChordPicker.vue';
+import SettingsButton from './components/SettingsButton.vue';
 
 export default {
   name: 'app',
@@ -24,6 +26,7 @@ export default {
     NoteCanvas,
     ExpressionCanvas,
     ChordPicker,
+    SettingsButton,
   },
   data() {
     return {
