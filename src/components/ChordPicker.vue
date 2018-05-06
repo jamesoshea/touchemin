@@ -6,7 +6,7 @@
       class="touchemin__note-container"
       @click="selectChord(chord)"
     >
-      <img class="touchemin__note-circle" src="../../public/img/note-circle.png">
+      <img class="touchemin__note-circle" src="../../public/img/note-circle.png" @click="selectChord(chord)">
     </div>
   </div>
 </template>
@@ -29,25 +29,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/variables.scss';
 .touchemin__note-picker {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 1.25%;
-}
-
-.touchemin__note-container {
-  flex-grow: 1;
-  margin: auto;
+  justify-content: space-around;
+  background: linear-gradient(to top, $darkest-color 15%, $lightest-color);
 }
 
 .touchemin__note-circle {
-  position: relative;
-  transform: translateY(75%);
-  width: 50%;
+  width: 20px;
 }
 </style>

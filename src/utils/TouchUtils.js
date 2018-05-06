@@ -13,4 +13,8 @@ const normaliseScreenHeight = (input, screenHeight) => {
   return 1 - ((input - 0) * (1 - 0) / (screenHeight - 0) + 0);
 };
 
-export { getTouchPos, normaliseScreenHeight };
+const normaliseScreenWidth = (input, screenWidth) => {
+  return 1 - ((input - 0) * (1 - 0) / (screenWidth - 0) + 0);
+};
+
+export { getTouchPos, normaliseScreenHeight, normaliseScreenWidth };

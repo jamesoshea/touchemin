@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <ChordPicker />
-    <div id="touchemin__expression-canvas-container">
-      <ExpressionCanvas :filter="filter"/>
+    <div class="touchemin__left-main-container">
+      <ChordPicker />
+      
     </div>
-    <div id="touchemin__note-canvas-container">
+    <div class="touchemin__right-main-container">
       <NoteCanvas :synth="synth"/>
+      <ExpressionCanvas :filter="filter"/>
     </div>
   </div>
 </template>
@@ -59,11 +60,6 @@ body {
   background-color: $lightest-color;
 }
 
-.canvas-container {
-  height: 100%;
-  width: 100%;
-}
-
 #app {
   position: absolute;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -78,13 +74,13 @@ body {
   bottom: 0;
 }
 
-#touchemin__expression-canvas-container {
-  flex-basis: 20%;
+.touchemin__left-main-container {
+  flex-basis: 10%;
   height: 100%;
 }
 
-#touchemin__note-canvas-container {
-  flex-basis: 80%;
+.touchemin__right-main-container {
+  flex-basis: 90%;
   height: 100%;
 }
 </style>
