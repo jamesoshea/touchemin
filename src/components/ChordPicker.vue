@@ -1,17 +1,29 @@
 <template>
   <div class="touchemin__note-picker">
-    <div v-for="note in notes" :key="note.id" class="touchemin__note-container">
+    <div
+      v-for="(chord, index) in chords"
+      :key="index"
+      class="touchemin__note-container"
+      @click="selectChord(chord)"
+    >
       <img class="touchemin__note-circle" src="../../public/img/note-circle.png">
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  data() {
-    return {
-      notes: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
-    };
+  computed: {
+    ...mapGetters({
+      chords: 'chords/chordsInKey',
+    }),
+  },
+  methods: {
+    selectChord(chord) {
+      this.$store.dispatch('chords/selectChord', chord);
+    },
   },
 };
 </script>

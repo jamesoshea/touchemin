@@ -1,13 +1,14 @@
+import Vue from 'vue';
 import Vuex from 'vuex';
 
 import ChordsModule from './modules/chords';
 
-const store = new Vuex.Store({
-  modules,
-});
+Vue.use(Vuex);
 
-const modules = {
-  ChordsModule,
-};
+const store = new Vuex.Store({
+  modules: {
+    chords: ChordsModule,
+  },
+});
 
 export default store;

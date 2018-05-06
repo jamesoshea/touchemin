@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { getTouchPos } from '../utils/TouchUtils.js';
 export default {
   name: 'NoteCanvas',
@@ -15,8 +16,12 @@ export default {
     return {
       canvas: null,
       ctx: null,
-      notes: [130.81, 164.81, 196.0, 261.63],
     };
+  },
+  computed: {
+    ...mapGetters({
+      selectedChord: 'chords/selectedChord',
+    }),
   },
   methods: {
     drawPoint(touch) {
@@ -27,10 +32,10 @@ export default {
       this.ctx.stroke();
     },
     startNote(identifier) {
-      this.synth.triggerAttack(this.notes[identifier]);
+      this.synth.triggerAttack(this.selectedChord[identifier]);
     },
     endNote(identifier) {
-      this.synth.triggerRelease([this.notes[identifier]]);
+      this.synth.triggerRelease([this.selectedChord[identifier]]);
     },
   },
   mounted() {

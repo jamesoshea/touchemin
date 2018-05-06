@@ -1,7 +1,7 @@
-const chords = state => state.chords;
+const chordsInKey = state => state.chordsInKey;
 const selectedChord = state => state.selectedChord;
 
 export default {
-  chords,
+  chordsInKey,
   selectedChord,
 };
