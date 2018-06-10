@@ -4,7 +4,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { getTouchPos } from '../utils/TouchUtils.js';
+
 export default {
   name: 'NoteCanvas',
   props: {
@@ -23,6 +23,7 @@ export default {
   },
   methods: {
     startNote(identifier) {
+      this.synth._context.resume();
       this.synth.triggerAttack(this.selectedChord[identifier]);
     },
     endNote(identifier) {
