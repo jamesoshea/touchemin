@@ -2,8 +2,18 @@
   <div>
     <div class="touchemin__modal-overlay" @click="$emit('closeModal')" />
     <div class="touchemin__modal">
-      <slot name="title" />
-      <slot name="body" />
+      <h1 slot="title" v-text="'Settings'" />
+      <div slot="body">
+        <form class="pure-form">
+          <select name="key" v-model="selectedKey">
+            <option v-for="key in keys()" :key="key" :value="key">{{ key }}</option>
+          </select>
+          <select name="octave" v-model="selectedOctave">
+            <option v-for="octave in octaves()" :key="octave" :value="octave">{{ octave }}</option>
+          </select>
+          <p v-text="keyRepresentation"/>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -11,7 +21,35 @@
 <script>
 export default {
   name: 'ToucheminModal',
-}
+  data() {
+    return {
+      showModal: false,
+      selectedKey: 'C',
+      selectedOctave: 3
+    };
+  },
+  computed: {
+    keyRepresentation() {
+      return `${this.selectedKey}${this.selectedOctave}`;
+    }
+  },
+  methods: {
+    octaves() {
+      const result = [];
+      for (let i = 0; i < 7; i++) {
+        result.push(i);
+      }
+      return result;
+    },
+    keys() {
+      const result = [];
+      for (let i = 65; i < 72; i++) {
+        result.push(String.fromCharCode(i));
+      }
+      return result;
+    }
+  }
+};
 </script>
 
 <style>
@@ -33,7 +71,7 @@ export default {
   width: 80%;
   height: 80%;
   opacity: 1;
-  background-color: #FFF;
+  background-color: #fff;
   z-index: 2;
 }
 </style>

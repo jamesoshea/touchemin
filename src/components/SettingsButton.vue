@@ -3,18 +3,7 @@
     <div @click="openSettingsModal">
       <SettingsSVG @click="openSettingsModal"/>
     </div>
-    <ToucheminModal v-if="showModal" @closeModal="closeSettingsModal">
-      <h1 slot="title" v-text="'Settings'" />
-      <div slot="body">
-        <select name="key" v-model="selectedKey">
-          <option v-for="key in keys()" :key="key" :value="key">{{ key }}</option>
-        </select>
-        <select name="octave" v-model="selectedOctave">
-          <option v-for="octave in octaves()" :key="octave" :value="octave">{{ octave }}</option>
-        </select>
-        <p v-text="keyRepresentation"/>
-      </div>
-    </ToucheminModal>
+    <ToucheminModal v-if="showModal" @closeModal="closeSettingsModal" />
   </div>
 </template>
 
@@ -25,23 +14,22 @@ export default {
   name: 'SettingsButton',
   components: {
     SettingsSVG,
-    ToucheminModal,
+    ToucheminModal
   },
   data() {
     return {
       showModal: false,
       selectedKey: 'C',
-      selectedOctave: 3,
+      selectedOctave: 3
     };
   },
   computed: {
     keyRepresentation() {
       return `${this.selectedKey}${this.selectedOctave}`;
-    },
+    }
   },
   methods: {
     openSettingsModal() {
-      console.log('hello');
       this.showModal = true;
     },
     closeSettingsModal() {
@@ -60,8 +48,8 @@ export default {
         result.push(String.fromCharCode(i));
       }
       return result;
-    },
-  },
+    }
+  }
 };
 </script>
 

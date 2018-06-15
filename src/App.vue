@@ -2,7 +2,6 @@
   <div id="app">
     <div class="touchemin__left-main-container">
       <ChordPicker />
-
     </div>
     <div class="touchemin__right-main-container">
       <NoteCanvas :synth="synth"/>
@@ -26,32 +25,32 @@ export default {
     NoteCanvas,
     ExpressionCanvas,
     ChordPicker,
-    SettingsButton,
+    SettingsButton
   },
   data() {
     return {
       filter: null,
-      synth: null,
+      synth: null
     };
   },
   mounted() {
     const synthOptions = {
       oscillator: {
-        type: 'sawtooth',
+        type: 'sawtooth'
       },
       envelope: {
         attack: 0.001,
         decay: 0.1,
         sustain: 0.1,
-        release: 0.1,
-      },
+        release: 0.1
+      }
     };
     this.filter = new Tone.Filter({
       type: 'lowpass',
-      Q: 12,
+      Q: 12
     }).toMaster();
     this.synth = new Tone.PolySynth(4, Tone.Synth, synthOptions).chain(this.filter, Tone.Master);
-  },
+  }
 };
 </script>
 
