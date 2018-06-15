@@ -6,7 +6,13 @@
     <ToucheminModal v-if="showModal" @closeModal="closeSettingsModal">
       <h1 slot="title" v-text="'Settings'" />
       <div slot="body">
-        wow
+        <select name="key" v-model="selectedKey">
+          <option v-for="key in keys()" :key="key" :value="key">{{ key }}</option>
+        </select>
+        <select name="octave" v-model="selectedOctave">
+          <option v-for="octave in octaves()" :key="octave" :value="octave">{{ octave }}</option>
+        </select>
+        <p v-text="keyRepresentation"/>
       </div>
     </ToucheminModal>
   </div>
@@ -24,15 +30,36 @@ export default {
   data() {
     return {
       showModal: false,
-    }
+      selectedKey: 'C',
+      selectedOctave: 3,
+    };
+  },
+  computed: {
+    keyRepresentation() {
+      return `${this.selectedKey}${this.selectedOctave}`;
+    },
   },
   methods: {
     openSettingsModal() {
-      console.log('hello')
+      console.log('hello');
       this.showModal = true;
     },
     closeSettingsModal() {
       this.showModal = false;
+    },
+    octaves() {
+      const result = [];
+      for (let i = 0; i < 7; i++) {
+        result.push(i);
+      }
+      return result;
+    },
+    keys() {
+      const result = [];
+      for (let i = 65; i < 72; i++) {
+        result.push(String.fromCharCode(i));
+      }
+      return result;
     },
   },
 };
