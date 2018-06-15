@@ -50,7 +50,6 @@ export default {
       Q: 12
     }).toMaster();
     this.synth = new Tone.PolySynth(4, Tone.Synth, synthOptions).chain(this.filter, Tone.Master);
-  }
 };
 </script>
 
