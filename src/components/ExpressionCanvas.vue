@@ -3,19 +3,19 @@
 </template>
 
 <script>
-import { getTouchPos, normaliseScreenWidth } from '../utils/TouchUtils.js';
+import { normaliseScreenWidth } from '../utils/TouchUtils.js';
 import { mapNormalisedToHumanHearing } from '../utils/SoundUtils.js';
 
 export default {
   name: 'ExpressionCanvas',
   props: {
-    filter: Object,
+    filter: Object
   },
   data() {
     return {
       canvas: null,
       ctx: null,
-      currentX: 0,
+      currentX: 0
     };
   },
   mounted() {
@@ -24,7 +24,7 @@ export default {
       e.preventDefault();
       const normalisedX = normaliseScreenWidth(
         e.targetTouches[0].pageX - window.innerWidth * 0.1,
-        window.innerWidth * 0.9,
+        window.innerWidth * 0.9
       );
       const newCutoffFrequency = mapNormalisedToHumanHearing(normalisedX);
       if (newCutoffFrequency < 80) {
@@ -32,7 +32,7 @@ export default {
       }
       this.filter.frequency.setValueAtTime(newCutoffFrequency, 0);
     });
-  },
+  }
 };
 </script>
 
