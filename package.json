@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "./node_modules/.bin/jest",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "netlify": "yarn run test && yarn run build"
   },
   "dependencies": {
     "register-service-worker": "^1.0.0",
@@ -35,8 +36,8 @@
     "not ie <= 8"
   ],
 	"engines": {
-		"node": ">= 8.0.0",
-		"npm": ">= 5.0.0"
+		"node": ">= 10.5.0",
+		"npm": ">= 6.1.0"
 	},
   "jest": {
     "moduleFileExtensions": [
